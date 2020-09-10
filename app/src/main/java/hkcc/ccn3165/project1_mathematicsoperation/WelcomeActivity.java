@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class welcome extends Activity {
+public class WelcomeActivity extends Activity {
 
     private Button start;
     private Button setting;
@@ -43,7 +43,7 @@ public class welcome extends Activity {
     private Button.OnClickListener startApp = new Button.OnClickListener(){
         @Override
         public void onClick(View v) {
-            Intent WCIntent = new Intent(welcome.this, MainActivity.class);
+            Intent WCIntent = new Intent(WelcomeActivity.this, MainActivity.class);
             //pass the number of question and time that are setted by the user or the program to MainActivity.class
             WCIntent.putExtra("userSetNumberOfQuestion", defualtNumberOfQuestion);
             WCIntent.putExtra("userSetTimeDuration", defualtTimeDuration);
@@ -54,11 +54,11 @@ public class welcome extends Activity {
         }
     };
 
-    //Start setting.class
+    //Start SettingActivity.class
     private Button.OnClickListener goSettingPage = new Button.OnClickListener(){
         @Override
         public void onClick(View v) {
-            Intent WCIntent = new Intent(welcome.this, setting.class);
+            Intent WCIntent = new Intent(WelcomeActivity.this, SettingActivity.class);
             //pass the number of question and time that are setted by the user or the program to MainActivity.class
             WCIntent.putExtra("userSetNumberOfQuestion", defualtNumberOfQuestion);
             WCIntent.putExtra("userSetTimeDuration", defualtTimeDuration);

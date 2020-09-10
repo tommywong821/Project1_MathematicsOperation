@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         skipQuestion.setOnClickListener(skipQ);
         checkResult.setOnClickListener(checkRes);
 
-        //getting the data from the setting page
+        //getting the data from the SettingActivity page
         Intent SettingIntent = getIntent();
         numberOfQuestion = SettingIntent.getIntExtra("userSetNumberOfQuestion",10);
         START_TIME = SettingIntent.getIntExtra("userSetTimeDuration", 5);
@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
     private Button.OnClickListener checkRes = new Button.OnClickListener(){
         public void onClick(View v) {
             speak(" ");
-            Intent MAIntent = new Intent(MainActivity.this, result.class);
+            Intent MAIntent = new Intent(MainActivity.this, ResultActivity.class);
             MAIntent.putExtra("correctAnswer",correctAns);
             MAIntent.putExtra("answeredQ", answeredQuestion);
             MAIntent.putExtra("numberOfQ", numberOfQuestion);
@@ -328,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
         countDownClock.setText(timeLeft);
     }
 
-    //speak fundtion of the text to speech
+    //speak function of the text to speech
     private void speak(String answerStatus) {
         float pitch =  1.0f;
         float speed =  0.8f;

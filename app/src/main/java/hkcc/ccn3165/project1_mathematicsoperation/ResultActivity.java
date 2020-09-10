@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-public class result extends Activity {
+public class ResultActivity extends Activity {
 
     private Button restart;
     private TextView resultDisplay;
@@ -38,7 +38,7 @@ public class result extends Activity {
         restart.setOnClickListener(restartApp);
         BacktoMainMenu.setOnClickListener(backToMM);
 
-        //getting the result from MainActivity.class
+        //getting the ResultActivity from MainActivity.class
         Intent MAIntent = getIntent();
         correctAnswer = MAIntent.getIntExtra("correctAnswer",0);
         answeredQuestion = MAIntent.getIntExtra("answeredQ", 0);
@@ -48,7 +48,7 @@ public class result extends Activity {
         timeLeft_seconds = MAIntent.getIntExtra("timeLeft_Second", 0);
         numberOfQuestion = MAIntent.getIntExtra("numberOfQ", 0);
 
-        //set the display result
+        //set the display ResultActivity
         displayText = String.format("Total question answered: %d \n " +
                 "Total correct answer: %d \n" +
                 "Total wrong answer: %d \n" +
@@ -56,21 +56,16 @@ public class result extends Activity {
         resultDisplay.setText(displayText);
 
         //set the text to speech
+        audioResult = String.format(" %d questions you have answered: \n " +
+                "%d of them are correct answers: \n" +
+                "%d of them are wrong answers: \n", answeredQuestion - 1, correctAnswer, answeredQuestion - 1 - correctAnswer);
+
         if(timeLeft_minutes == 0 && timeLeft_seconds == 0){
-            audioResult = String.format(" %d questions you have answered: \n " +
-                    "%d of them are correct answers: \n" +
-                    "%d of them are wrong answers: \n" +
-                    "no time left", answeredQuestion - 1, correctAnswer, answeredQuestion - 1 - correctAnswer);
+            audioResult = audioResult + "no time left";
         }else if(timeLeft_minutes == 0) {
-            audioResult = String.format(" %d questions you have answered: \n " +
-                    "%d of them are correct answers: \n" +
-                    "%d of them are wrong answers: \n" +
-                    "Time left: %d seconds", answeredQuestion - 1, correctAnswer, answeredQuestion - 1 - correctAnswer, timeLeft_seconds);
+            audioResult = audioResult + String.format("Time left: %d seconds", timeLeft_seconds);
         }else{
-            audioResult = String.format(" %d questions you have answered: \n " +
-                    "%d of them are correct answers: \n" +
-                    "%d of them are wrong answers: \n" +
-                    "Time left: %d minutes and %d seconds", answeredQuestion - 1, correctAnswer, answeredQuestion - 1 - correctAnswer, timeLeft_minutes, timeLeft_seconds);
+            audioResult = audioResult + String.format("Time left: %d minutes and %d seconds", timeLeft_minutes, timeLeft_seconds);
         }
 
         //initialize the text to speech object
@@ -107,7 +102,7 @@ public class result extends Activity {
         @Override
         public void onClick(View v) {
             speak("");
-            Intent ReIntent = new Intent(result.this, MainActivity.class);
+            Intent ReIntent = new Intent(ResultActivity.this, MainActivity.class);
             ReIntent.putExtra("userSetNumberOfQuestion", numberOfQuestion);
             ReIntent.putExtra("userSetTimeDuration", savedTime);
             ReIntent.setFlags(ReIntent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -121,7 +116,7 @@ public class result extends Activity {
         @Override
         public void onClick(View v) {
             speak("");
-            Intent ReIntent = new Intent(result.this, welcome.class);
+            Intent ReIntent = new Intent(ResultActivity.this, WelcomeActivity.class);
             ReIntent.putExtra("userSetNumberOfQuestion", (numberOfQuestion));
             ReIntent.putExtra("TimeDuration", savedTime);
             ReIntent.setFlags(ReIntent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class setting extends Activity {
+public class SettingActivity extends Activity {
 
     private EditText numberOfQuestion;
     private EditText timeDuration;
@@ -47,7 +47,7 @@ public class setting extends Activity {
     private Button.OnClickListener backToMM = new Button.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent settingIntent = new Intent(setting.this, welcome.class);
+            Intent settingIntent = new Intent(SettingActivity.this, WelcomeActivity.class);
             settingIntent.putExtra("userSetNumberOfQuestion",numberOfQuestionOnApp);
             settingIntent.putExtra("TimeDuration",timeDurationOnApp);
             startActivity(settingIntent);            //handle the question with num1 + num2
@@ -72,7 +72,7 @@ public class setting extends Activity {
         public void onClick(View v) {
             numberOfQuestionOnApp = Integer.parseInt(numberOfQuestion.getText().toString());
             timeDurationOnApp = Integer.parseInt(timeDuration.getText().toString());
-            Intent settingIntent = new Intent(setting.this, welcome.class);
+            Intent settingIntent = new Intent(SettingActivity.this, WelcomeActivity.class);
             settingIntent.putExtra("userSetNumberOfQuestion",numberOfQuestionOnApp);
             settingIntent.putExtra("TimeDuration",timeDurationOnApp);
             startActivity(settingIntent);
